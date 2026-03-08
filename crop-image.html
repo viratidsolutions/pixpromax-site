@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Crop Image Online | PixProMax</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+margin:0;
+background:#f5f5f5;
+text-align:center;
+}
+
+header{
+background:#111;
+color:white;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+margin-top:40px;
+}
+
+canvas{
+max-width:90%;
+margin-top:20px;
+border:1px solid #ccc;
+}
+
+button{
+background:#0077ff;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin:10px;
+}
+
+button:hover{
+background:#005ce0;
+}
+
+input{
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>PixProMax</header>
+
+<div class="container">
+
+<h1>Crop Image Online</h1>
+
+<p>Select an image and crop it instantly.</p>
+
+<input type="file" id="upload" accept="image/*">
+
+<br>
+
+<canvas id="canvas"></canvas>
+
+<br>
+
+<button onclick="crop()">Crop Center</button>
+
+<button onclick="download()">Download Cropped Image</button>
+
+</div>
+
+<script>
+
+let canvas=document.getElementById("canvas")
+let ctx=canvas.getContext("2d")
+
+let img=new Image()
+
+document.getElementById("upload").addEventListener("change",function(e){
+
+let file=e.target.files[0]
+
+img.onload=function(){
+
+canvas.width=img.width
+canvas.height=img.height
+
+ctx.drawImage(img,0,0)
+
+}
+
+img.src=URL.createObjectURL(file)
+
+})
+
+function crop(){
+
+let w=canvas.width/2
+let h=canvas.height/2
+
+let x=canvas.width/4
+let y=canvas.height/4
+
+let imageData=ctx.getImageData(x,y,w,h)
+
+canvas.width=w
+canvas.height=h
+
+ctx.putImageData(imageData,0,0)
+
+}
+
+function download(){
+
+let link=document.createElement("a")
+
+link.download="cropped-image.png"
+
+link.href=canvas.toDataURL()
+
+link.click()
+
+}
+
+</script>
+
+</body>
+
+</html>
