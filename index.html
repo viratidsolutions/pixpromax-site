@@ -223,7 +223,99 @@ opacity:0.9;
 
 }
 
+.category-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:30px;
+
+}
+
+.category-card{
+
+background:white;
+padding:30px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
+cursor:pointer;
+transition:all 0.25s ease;
+
+}
+
+.category-card:hover{
+
+transform:translateY(-6px);
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+
+}
+
+.category-card i{
+
+font-size:36px;
+color:#0077ff;
+margin-bottom:15px;
+
+}
+
+.category-card p{
+
+font-size:14px;
+color:#666;
+
+}
+
 </style>
+<div class="section">
+
+<h2>Browse by Category</h2>
+
+<div class="category-grid">
+
+<div class="category-card" onclick="location.href='/image-tools'">
+
+<i class="fa-solid fa-pen-ruler"></i>
+
+<h3>Image Editor</h3>
+
+<p>Resize, crop and edit images</p>
+
+</div>
+
+<div class="category-card" onclick="location.href='/image-tools'">
+
+<i class="fa-solid fa-right-left"></i>
+
+<h3>Image Converter</h3>
+
+<p>Convert between image formats</p>
+
+</div>
+
+<div class="category-card" onclick="location.href='/image-tools'">
+
+<i class="fa-solid fa-file-zipper"></i>
+
+<h3>Image Optimizer</h3>
+
+<p>Compress and optimize images</p>
+
+</div>
+
+<div class="category-card" onclick="location.href='/document-tools'">
+
+<i class="fa-solid fa-file-lines"></i>
+
+<h3>Document Tools</h3>
+
+<p>Convert and manage PDFs</p>
+
+</div>
+
+</div>
+
+</div>
 
 </head>
 <script>
