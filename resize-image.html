@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Resize Image Online | PixProMax</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f5f5;
+margin:0;
+text-align:center;
+}
+
+header{
+background:#111;
+color:white;
+padding:18px;
+font-size:22px;
+}
+
+.container{
+margin-top:40px;
+}
+
+.dropbox{
+border:2px dashed #bbb;
+padding:40px;
+width:60%;
+margin:auto;
+background:white;
+border-radius:6px;
+}
+
+input{
+margin-top:10px;
+padding:6px;
+}
+
+canvas{
+margin-top:20px;
+max-width:90%;
+}
+
+button{
+background:#0077ff;
+color:white;
+padding:12px 28px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+background:#005ce0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>PixProMax</header>
+
+<div class="container">
+
+<h1>Resize Image Online</h1>
+
+<p>Change image width and height instantly.</p>
+
+<div class="dropbox">
+<input type="file" id="upload" accept="image/*">
+</div>
+
+<br>
+
+<label>Width</label><br> <input type="number" id="width">
+
+<br>
+
+<label>Height</label><br> <input type="number" id="height">
+
+<br>
+
+<canvas id="canvas"></canvas>
+
+<br>
+
+<button onclick="resizeImage()">Resize Image</button>
+
+<br>
+
+<button onclick="download()">Download Image</button>
+
+</div>
+
+<script>
+
+let canvas=document.getElementById("canvas")
+let ctx=canvas.getContext("2d")
+
+let img=new Image()
+
+document.getElementById("upload").addEventListener("change",function(e){
+
+let file=e.target.files[0]
+
+img.onload=function(){
+
+document.getElementById("width").value=img.width
+document.getElementById("height").value=img.height
+
+canvas.width=img.width
+canvas.height=img.height
+
+ctx.drawImage(img,0,0)
+
+}
+
+img.src=URL.createObjectURL(file)
+
+})
+
+function resizeImage(){
+
+let w=document.getElementById("width").value
+let h=document.getElementById("height").value
+
+canvas.width=w
+canvas.height=h
+
+ctx.drawImage(img,0,0,w,h)
+
+}
+
+function download(){
+
+let link=document.createElement("a")
+
+link.download="pixpromax-resized.png"
+
+link.href=canvas.toDataURL()
+
+link.click()
+
+}
+
+</script>
+
+</body>
+</html>
