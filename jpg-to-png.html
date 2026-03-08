@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>JPG to PNG Converter Online | PixProMax</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+font-family:Arial, sans-serif;
+background:#f5f5f5;
+margin:0;
+text-align:center;
+}
+
+header{
+background:#111;
+color:white;
+padding:18px;
+font-size:22px;
+}
+
+.container{
+margin-top:40px;
+}
+
+.dropbox{
+border:2px dashed #bbb;
+padding:40px;
+width:60%;
+margin:auto;
+background:white;
+border-radius:6px;
+}
+
+canvas{
+margin-top:20px;
+max-width:90%;
+}
+
+button{
+background:#0077ff;
+color:white;
+padding:12px 28px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+background:#005ce0;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>PixProMax</header>
+
+<div class="container">
+
+<h1>JPG to PNG Converter</h1>
+
+<p>Convert JPG images to PNG instantly.</p>
+
+<div class="dropbox">
+<input type="file" id="upload" accept="image/jpeg">
+</div>
+
+<br>
+
+<canvas id="canvas"></canvas>
+
+<br>
+
+<button onclick="convert()">Convert to PNG</button>
+
+<br>
+
+<button onclick="download()">Download PNG</button>
+
+</div>
+
+<script>
+
+let canvas=document.getElementById("canvas")
+let ctx=canvas.getContext("2d")
+
+let img=new Image()
+
+document.getElementById("upload").addEventListener("change",function(e){
+
+let file=e.target.files[0]
+
+if(!file) return
+
+img.onload=function(){
+
+canvas.width=img.width
+canvas.height=img.height
+
+ctx.drawImage(img,0,0)
+
+}
+
+img.src=URL.createObjectURL(file)
+
+})
+
+function convert(){
+
+canvas.toDataURL("image/png")
+
+}
+
+function download(){
+
+let link=document.createElement("a")
+
+link.download="pixpromax-image.png"
+
+link.href=canvas.toDataURL("image/png")
+
+link.click()
+
+}
+
+</script>
+
+</body>
+</html>
