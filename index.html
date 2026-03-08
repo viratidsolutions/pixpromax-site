@@ -190,6 +190,39 @@ margin-top:40px;
 margin-bottom:20px;
 }
 
+.hero-buttons{
+
+margin-top:25px;
+
+}
+
+.hero-btn{
+
+display:inline-block;
+background:white;
+color:#0077ff;
+padding:12px 22px;
+border-radius:6px;
+text-decoration:none;
+font-weight:600;
+margin:8px;
+
+}
+
+.hero-btn.secondary{
+
+background:transparent;
+border:2px solid white;
+color:white;
+
+}
+
+.hero-btn:hover{
+
+opacity:0.9;
+
+}
+
 </style>
 
 </head>
@@ -237,11 +270,19 @@ card.style.display="none"
 
 <div class="hero">
 
-<h1>Powerful Online Tools for Images & Documents</h1>
+<h1>Free Online Tools for Images & Documents</h1>
 
-<p>Compress, resize, convert and optimize files instantly — fast and free.</p>
+<p>Compress, resize, convert and optimize files instantly.</p>
 
 <input type="text" id="toolSearch" placeholder="Search tools..." onkeyup="searchTools()">
+
+<div class="hero-buttons">
+
+<a href="/image-tools" class="hero-btn">Explore Image Tools</a>
+
+<a href="/document-tools" class="hero-btn secondary">Explore Document Tools</a>
+
+</div>
 
 </div>
 
