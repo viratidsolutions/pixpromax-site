@@ -51,10 +51,50 @@ margin-top:20px;
 button:hover{
 background:#005ce0;
 }
+.upload-box{
+
+border:2px dashed #0077ff;
+border-radius:10px;
+padding:40px;
+text-align:center;
+background:#f9fbff;
+cursor:pointer;
+margin-top:20px;
+
+}
+
+.upload-box:hover{
+
+background:#eef5ff;
+
+}
 </style>
 
 </head>
+<script>
 
+const box=document.getElementById("uploadBox")
+const input=document.getElementById("fileInput")
+
+box.addEventListener("dragover",e=>{
+e.preventDefault()
+box.style.background="#e6f0ff"
+})
+
+box.addEventListener("dragleave",()=>{
+box.style.background="#f9fbff"
+})
+
+box.addEventListener("drop",e=>{
+e.preventDefault()
+
+input.files=e.dataTransfer.files
+
+box.style.background="#f9fbff"
+
+})
+
+</script>
 <body>
 
 <header>PixProMax</header>
@@ -66,7 +106,17 @@ background:#005ce0;
 <p>Convert JPG images to PNG instantly.</p>
 
 <div class="dropbox">
-<input type="file" id="upload" accept="image/jpeg">
+<div class="upload-box" id="uploadBox">
+
+<p>Drag & Drop your image here</p>
+
+<p>or</p>
+
+<button onclick="document.getElementById('fileInput').click()">Upload Image</button>
+
+<input type="file" id="fileInput" hidden>
+
+</div>
 </div>
 
 <br>
