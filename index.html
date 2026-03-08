@@ -81,10 +81,29 @@ color:#0077ff;
 
 .hero{
 
-background:linear-gradient(135deg,#0077ff,#00c6ff);
+background:linear-gradient(-45deg,#0077ff,#00c6ff,#4facfe,#43e97b);
+background-size:400% 400%;
+animation:gradientMove 12s ease infinite;
+
 color:white;
 text-align:center;
-padding:80px 20px;
+padding:90px 20px;
+
+}
+
+@keyframes gradientMove{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
 
 }
 
