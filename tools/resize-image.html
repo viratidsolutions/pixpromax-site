@@ -175,6 +175,31 @@ display:none;
 
 </head>
 <script src="../js/core/canvas-engine.js"></script>
+document.getElementById("presetSelect").addEventListener("change",function(){
+
+const preset = this.value
+
+if(preset==="instagram"){
+document.getElementById("width").value = 1080
+document.getElementById("height").value = 1080
+}
+
+if(preset==="youtube"){
+document.getElementById("width").value = 1280
+document.getElementById("height").value = 720
+}
+
+if(preset==="passport"){
+document.getElementById("width").value = 413
+document.getElementById("height").value = 531
+}
+
+if(preset==="exam"){
+document.getElementById("width").value = 200
+document.getElementById("height").value = 230
+}
+
+})
 <script>
 
 const engine = new ImageEngine()
@@ -187,7 +212,7 @@ const file = event.target.files[0]
 
 engine.load(file,()=>{
 
-document.getElementById("originalPreview").src = engine.export()
+document.getElementById("originalPreview").src = engine.canvas.toDataURL()
 
 })
 
@@ -200,13 +225,19 @@ const height = document.getElementById("height").value
 
 engine.resize(width,height)
 
-document.getElementById("resultPreview").src = engine.export()
+document.getElementById("resultPreview").src = engine.canvas.toDataURL()
 
 }
 
 function downloadImage(){
 
-engine.download("resized-image.png")
+const link = document.createElement("a")
+
+link.download = "pixpromax-image.png"
+
+link.href = engine.canvas.toDataURL("image/png")
+
+link.click()
 
 }
 
@@ -292,6 +323,7 @@ RESIZE CONTROLS
 
 
 <!-- PRESET ENGINE -->
+<select id="presetSelect">
 
 <div class="presets">
 
@@ -299,15 +331,11 @@ RESIZE CONTROLS
 
 <select>
 
-<option>Custom</option>
-
-<option>Instagram Post</option>
-
-<option>YouTube Thumbnail</option>
-
-<option>Passport Photo</option>
-
-<option>Government Exam Photo</option>
+<option value="">Custom</option>
+<option value="instagram">Instagram Post</option>
+<option value="youtube">YouTube Thumbnail</option>
+<option value="passport">Passport Photo</option>
+<option value="exam">Government Exam Photo</option>
 
 </select>
 
