@@ -1,668 +1,359 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PixProMax – Free Online Image & Document Tools</title>
-<meta name="description" content="Free online tools to compress, resize, convert and optimize images and documents instantly.">
+<title>PixProMax - Smart Image & PDF Toolkit</title>
 
-<link rel="icon" type="image/png" href="/favicon.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- 
+PIXPRO MAX V3
+Clean minimal UI
+File-first workflow
+-->
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+/* -------- GLOBAL STYLES -------- */
 
 body{
-
-font-family:'Poppins',sans-serif;
-
-background:
-linear-gradient(135deg,#eef3ff,#f7fbff);
-
-color:#333;
-
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+    margin:0;
+    background:#f7f9fc;
+    color:#111;
 }
 
-/* NAVBAR */
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+/* -------- HEADER -------- */
 
 header{
-position:sticky;
-top:0;
-background:white;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 40px;
-box-shadow:0 2px 10px rgba(0,0,0,0.06);
-z-index:100;
+    text-align:center;
+    margin-bottom:40px;
 }
 
-.logo img{
-height:70px;
+header h1{
+    font-size:38px;
+    margin-bottom:10px;
 }
 
-nav a{
-margin-left:25px;
-text-decoration:none;
-color:#333;
-font-weight:500;
+header p{
+    color:#555;
 }
 
-nav a:hover{
-color:#0077ff;
+/* -------- CATEGORY TABS -------- */
+
+.tabs{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
 }
 
-/* HERO */
-
-.hero{
-
-background:linear-gradient(-45deg,#0077ff,#00c6ff,#4facfe,#43e97b);
-background-size:400% 400%;
-animation:gradientMove 12s ease infinite;
-
-color:white;
-text-align:center;
-padding:120px 20px;
-
+.tab{
+    background:white;
+    padding:12px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    border:1px solid #e3e6ec;
+    transition:0.2s;
 }
 
-.hero-inner{
-max-width:900px;
-margin:auto;
+.tab:hover{
+    background:#eef3ff;
 }
 
-.hero h1{
-font-size:42px;
-margin-bottom:15px;
+/* -------- UPLOAD BOX -------- */
+
+.upload-box{
+    border:2px dashed #cfd6e6;
+    background:white;
+    border-radius:12px;
+    padding:40px;
+    text-align:center;
+    cursor:pointer;
 }
 
-.hero p{
-font-size:18px;
-opacity:0.9;
-margin-bottom:25px;
+.upload-box:hover{
+    border-color:#5b7cff;
 }
 
-#toolSearch{
-
-padding:14px;
-width:350px;
-max-width:90%;
-border-radius:6px;
-border:none;
-font-size:16px;
-
+.upload-box input{
+    display:none;
 }
 
-.hero-buttons{
-margin-top:25px;
+/* -------- ANALYSIS PANEL -------- */
+
+.analysis{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #e3e6ec;
+    display:none;
 }
 
-.hero-btn{
-
-display:inline-block;
-background:white;
-color:#0077ff;
-padding:12px 24px;
-border-radius:6px;
-text-decoration:none;
-font-weight:600;
-margin:8px;
-
+.analysis h3{
+    margin-top:0;
 }
 
-.hero-btn.secondary{
+/* -------- SUGGESTED ACTIONS -------- */
 
-background:transparent;
-border:2px solid white;
-color:white;
-
+.actions{
+    margin-top:20px;
 }
 
-.hero-btn:hover{
-opacity:0.9;
+.action-btn{
+    display:inline-block;
+    margin:8px;
+    padding:10px 16px;
+    background:#eef3ff;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-@keyframes gradientMove{
-
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-
+.action-btn:hover{
+    background:#dce6ff;
 }
 
-/* SECTIONS */
+/* -------- PRESET PANEL -------- */
 
-.section{
-max-width:1200px;
-margin:auto;
-padding:80px 24px;
+.presets{
+    margin-top:25px;
+    display:none;
 }
 
-.section h2{
-text-align:center;
-font-size:32px;
-margin-bottom:40px;
+select{
+    padding:8px;
+    margin:10px;
 }
 
-/* CATEGORY CARDS */
+/* -------- WORKSPACE -------- */
 
-.category-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:30px;
+.workspace{
+    margin-top:30px;
+    display:none;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #e3e6ec;
 }
 
-.category-card{
-
-background:rgba(255,255,255,0.65);
-
-backdrop-filter:blur(18px);
--webkit-backdrop-filter:blur(18px);
-
-border-radius:18px;
-
-border:1px solid rgba(255,255,255,0.4);
-
-padding:36px;
-
-text-align:center;
-
-box-shadow:
-0 10px 25px rgba(0,0,0,0.08);
-
-transition:
-transform .45s cubic-bezier(.22,1,.36,1),
-box-shadow .35s ease;
-
-transform-style: preserve-3d;
-
-cursor:pointer;
-
+.preview{
+    display:flex;
+    gap:20px;
+    margin-top:20px;
 }
 
-.category-card:hover{
-
-transform:translateY(-10px) scale(1.04);
-
-box-shadow:
-0 30px 60px rgba(0,0,0,0.18);
-
+.preview img{
+    max-width:45%;
+    border-radius:8px;
 }
 
-.category-card:hover i{
-
-transform:scale(1.2) rotate(10deg);
-
+.download{
+    margin-top:20px;
+    padding:12px 20px;
+    background:#5b7cff;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-.category-card i{
-
-transition:transform .35s ease;
-
+.download:hover{
+    background:#3c5ee6;
 }
-
-/* TOOL GRID */
-
-.grid{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
-
-}
-
-.card{
-
-background:rgba(255,255,255,0.65);
-
-backdrop-filter:blur(18px);
--webkit-backdrop-filter:blur(18px);
-
-border-radius:18px;
-
-border:1px solid rgba(255,255,255,0.4);
-
-padding:32px;
-
-text-align:center;
-
-box-shadow:
-0 10px 25px rgba(0,0,0,0.08);
-
-transition:
-transform .45s cubic-bezier(.22,1,.36,1),
-box-shadow .35s ease,
-background .35s ease;
-
-transform-style: preserve-3d;
-
-position:relative;
-
-}
-
-.card:hover{
-
-transform:translateY(-10px) scale(1.04);
-
-box-shadow:
-0 30px 60px rgba(0,0,0,0.18);
-
-background:rgba(255,255,255,0.75);
-
-}
-
-
-.card::after{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-border-radius:18px;
-
-opacity:0;
-
-background:
-linear-gradient(
-120deg,
-rgba(255,255,255,0.5),
-rgba(255,255,255,0.1)
-);
-
-transition:opacity .35s ease;
-
-}
-
-.card:hover::after{
-
-opacity:1;
-
-}
-
-.card h3{
-margin-bottom:15px;
-}
-
-button{
-
-background:#0077ff;
-border:none;
-
-padding:10px 22px;
-color:white;
-
-border-radius:8px;
-
-cursor:pointer;
-
-transition:
-transform .25s cubic-bezier(.22,1,.36,1),
-box-shadow .25s ease,
-background .2s ease;
-
-}
-
-button:hover{
-
-transform:translateY(-2px);
-
-box-shadow:
-0 10px 20px rgba(0,119,255,0.3);
-
-background:#005ce0;
-
-}
-
-/* FOOTER */
-
-footer{
-margin-top:80px;
-background:#111;
-color:white;
-text-align:center;
-padding:25px;
-}
-
-.tool-icon{
-
-font-size:40px;
-
-color:#0077ff;
-
-margin-bottom:15px;
-
-transition:
-transform .35s ease,
-color .35s ease;
-
-}
-
-.card:hover .tool-icon{
-
-transform:scale(1.25) rotate(10deg);
-
-color:#005ce0;
-
-}
-
-.section{
-
-animation:fadeUp .7s ease;
-
-}
-
-@keyframes fadeUp{
-
-from{
-opacity:0;
-transform:translateY(20px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-.category-card::after{
-
-content:"";
-
-position:absolute;
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-border-radius:18px;
-
-opacity:0;
-
-background:linear-gradient(
-120deg,
-rgba(255,255,255,0.45),
-rgba(255,255,255,0.05)
-);
-
-transition:opacity .35s ease;
-
-}
-
-.category-card:hover::after{
-opacity:1;
-}
-
-.card::before,
-.category-card::before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-border-radius:18px;
-
-background:radial-gradient(
-circle at var(--x) var(--y),
-rgba(255,255,255,0.55),
-transparent 60%
-);
-
-opacity:0;
-
-transition:opacity .25s ease;
-
-pointer-events:none;
-
-}
-
-.card:hover::before,
-.category-card:hover::before{
-
-opacity:1;
-
-}
-
 
 </style>
-
 </head>
-
-<script>
-
-const cards = document.querySelectorAll(".card, .category-card");
-
-cards.forEach(card => {
-
-card.addEventListener("mousemove", (e) => {
-
-const rect = card.getBoundingClientRect();
-
-const x = e.clientX - rect.left;
-const y = e.clientY - rect.top;
-
-const centerX = rect.width / 2;
-const centerY = rect.height / 2;
-
-const rotateX = -(y - centerY) / 15;
-const rotateY = (x - centerX) / 15;
-
-card.style.transform =
-`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
-
-});
-
-card.addEventListener("mouseleave", () => {
-
-card.style.transform =
-"perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
-
-});
-
-});
-
-</script>
-
-<script>
-
-const glowCards = document.querySelectorAll(".card, .category-card");
-
-glowCards.forEach(card => {
-
-card.addEventListener("mousemove", e => {
-
-const rect = card.getBoundingClientRect();
-
-const x = e.clientX - rect.left;
-const y = e.clientY - rect.top;
-
-card.style.setProperty("--x", x + "px");
-card.style.setProperty("--y", y + "px");
-
-});
-
-});
-
-</script>
-
 
 <body>
 
+<div class="container">
+
+<!-- ==================================================
+HEADER
+Simple introduction
+================================================== -->
+
 <header>
-
-<div class="logo">
-<img src="/logo.png" alt="PixProMax">
-</div>
-
-<nav>
-<a href="/">Home</a>
-<a href="/image-tools">Image Tools</a>
-<a href="/document-tools">Document Tools</a>
-</nav>
-
+<h1>PixProMax</h1>
+<p>Smart Tools for Images, PDFs & Documents</p>
 </header>
 
-<div class="hero">
+<!-- ==================================================
+CATEGORY TABS
+Main navigation categories
+================================================== -->
 
-<div class="hero-inner">
+<div class="tabs">
 
-<h1>Free Online Tools for Images & Documents</h1>
+<div class="tab">Image Tools</div>
+<div class="tab">PDF Tools</div>
+<div class="tab">Document Tools</div>
+<div class="tab">Exam & Passport</div>
+<div class="tab">Social Media</div>
 
-<p>Compress, resize, convert and optimize files instantly.</p>
+</div>
 
-<input type="text" id="toolSearch" placeholder="Search tools...">
+<!-- ==================================================
+UPLOAD BOX
+Main entry point
+================================================== -->
 
-<div class="hero-buttons">
+<div class="upload-box" onclick="document.getElementById('fileInput').click()">
 
-<a href="/image-tools" class="hero-btn">Explore Image Tools</a>
+<p><b>Upload File</b></p>
+<p>Drag & Drop, Browse or Paste Image</p>
 
-<a href="/document-tools" class="hero-btn secondary">Explore Document Tools</a>
+<input type="file" id="fileInput">
+
+</div>
+
+<!-- ==================================================
+FILE ANALYSIS
+Simulated AI analysis
+================================================== -->
+
+<div class="analysis" id="analysis">
+
+<h3>File Analysis</h3>
+
+<p id="fileInfo"></p>
+
+<!-- Suggested actions -->
+<div class="actions">
+
+<p><b>Suggested Actions</b></p>
+
+<div class="action-btn" onclick="showPresets()">Resize Image</div>
+<div class="action-btn" onclick="showPresets()">Compress Image</div>
+<div class="action-btn" onclick="showPresets()">Convert Format</div>
+<div class="action-btn" onclick="showPresets()">Make Portal Ready</div>
 
 </div>
 
 </div>
 
-</div>
+<!-- ==================================================
+PRESET SELECTION
+Region + purpose presets
+================================================== -->
 
-<div class="section">
+<div class="presets" id="presets">
 
-<h2>Browse by Category</h2>
+<h3>Choose Preset</h3>
 
-<div class="category-grid">
+<label>Region</label>
+<select>
+<option>India</option>
+<option>USA</option>
+<option>Europe</option>
+<option>Global</option>
+</select>
 
-<div class="category-card" onclick="location.href='/image-tools'">
-<i class="fa-solid fa-pen-ruler"></i>
-<h3>Image Editor</h3>
-<p>Resize, crop and edit images</p>
-</div>
+<label>Purpose</label>
+<select>
+<option>Government Exam</option>
+<option>Job Application</option>
+<option>Visa</option>
+<option>Passport</option>
+<option>Social Media</option>
+</select>
 
-<div class="category-card" onclick="location.href='/image-tools'">
-<i class="fa-solid fa-right-left"></i>
-<h3>Image Converter</h3>
-<p>Convert between image formats</p>
-</div>
+<br>
 
-<div class="category-card" onclick="location.href='/image-tools'">
-<i class="fa-solid fa-file-zipper"></i>
-<h3>Image Optimizer</h3>
-<p>Compress and optimize images</p>
-</div>
-
-<div class="category-card" onclick="location.href='/document-tools'">
-<i class="fa-solid fa-file-lines"></i>
-<h3>Document Tools</h3>
-<p>Convert and manage PDFs</p>
-</div>
+<button class="download" onclick="startProcessing()">Apply Preset</button>
 
 </div>
 
+<!-- ==================================================
+WORKSPACE
+Processing preview
+================================================== -->
+
+<div class="workspace" id="workspace">
+
+<h3>Processing Result</h3>
+
+<p>Original Size: 3.4 MB → Optimized: 48 KB</p>
+
+<div class="preview">
+
+<img id="originalPreview">
+<img id="resultPreview">
+
 </div>
 
-<div class="section">
-
-<h2>Popular Tools</h2>
-
-<div class="grid">
-
-<div class="card">
-<i class="fa-solid fa-expand tool-icon"></i>
-<h3>Resize Image</h3>
-<button onclick="location.href='/resize-image'">Open Tool</button>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-crop tool-icon"></i>
-<h3>Crop Image</h3>
-<button onclick="location.href='/crop-image'">Open Tool</button>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-right-left tool-icon"></i>
-<h3>JPG to PNG</h3>
-<button onclick="location.href='/jpg-to-png'">Open Tool</button>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-right-left tool-icon"></i>
-<h3>PNG to JPG</h3>
-<button onclick="location.href='/png-to-jpg'">Open Tool</button>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-file-zipper tool-icon"></i>
-<h3>Compress Image</h3>
-<button onclick="location.href='/compress-image'">Open Tool</button>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-layer-group tool-icon"></i>
-<h3>Bulk Image Compressor</h3>
-<button onclick="location.href='/bulk-compress'">Open Tool</button>
-</div>
+<button class="download">Download File</button>
 
 </div>
 
 </div>
 
-<div class="section">
+<!-- ==================================================
+JAVASCRIPT LOGIC
+Handles upload, analysis and UI flow
+================================================== -->
 
-<h2>Document Tools</h2>
+<script>
 
-<div class="grid">
+/* File input listener */
 
-<div class="card">
-<h3>Image to PDF</h3>
-<button onclick="location.href='/image-to-pdf'">Open Tool</button>
-</div>
+document.getElementById("fileInput").addEventListener("change", function(e){
 
-<div class="card">
-<h3>PDF to Image</h3>
-<button onclick="location.href='/pdf-to-image'">Open Tool</button>
-</div>
+const file = e.target.files[0]
 
-<div class="card">
-<h3>Merge PDF</h3>
-<button onclick="location.href='/merge-pdf'">Open Tool</button>
-</div>
+if(!file) return
 
-<div class="card">
-<h3>Split PDF</h3>
-<button onclick="location.href='/split-pdf'">Open Tool</button>
-</div>
+/* Display file information */
 
-</div>
+document.getElementById("fileInfo").innerText =
+"Name: " + file.name + " | Size: " + Math.round(file.size/1024) + " KB"
 
-</div>
+/* Show analysis section */
 
-<footer>
+document.getElementById("analysis").style.display="block"
 
-© 2026 PixProMax – Free Online Image & Document Tools
+/* Show image preview */
 
-</footer>
+const reader = new FileReader()
+
+reader.onload = function(event){
+
+document.getElementById("originalPreview").src = event.target.result
+document.getElementById("resultPreview").src = event.target.result
+
+}
+
+reader.readAsDataURL(file)
+
+})
+
+/* Show preset panel */
+
+function showPresets(){
+
+document.getElementById("presets").style.display="block"
+
+}
+
+/* Simulate processing */
+
+function startProcessing(){
+
+document.getElementById("workspace").style.display="block"
+
+}
+
+</script>
 
 </body>
 </html>
+```
