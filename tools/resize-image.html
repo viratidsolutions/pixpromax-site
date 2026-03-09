@@ -175,6 +175,42 @@ display:none;
 
 </head>
 <script src="../js/core/canvas-engine.js"></script>
+<script>
+
+const engine = new ImageEngine()
+
+const uploadInput = document.getElementById("fileInput")
+
+uploadInput.addEventListener("change",(event)=>{
+
+const file = event.target.files[0]
+
+engine.load(file,()=>{
+
+document.getElementById("originalPreview").src = engine.export()
+
+})
+
+})
+
+function resizeImage(){
+
+const width = document.getElementById("width").value
+const height = document.getElementById("height").value
+
+engine.resize(width,height)
+
+document.getElementById("resultPreview").src = engine.export()
+
+}
+
+function downloadImage(){
+
+engine.download("resized-image.png")
+
+}
+
+</script>
 <body>
 
 <div class="container">
