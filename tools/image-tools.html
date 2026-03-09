@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Image Tools | PixProMax</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+margin:0;
+background:#f5f5f5;
+text-align:center;
+}
+
+header{
+background:#111;
+color:white;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+}
+
+.section{
+padding:40px 20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+max-width:900px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:8px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+button{
+background:#0077ff;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#005ce0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>PixProMax</header>
+
+<div class="section">
+
+<h1>Image Tools</h1>
+
+<p>Edit, convert and optimize your images online.</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>Compress Image</h3>
+<button onclick="location.href='/compress-image'">Open</button>
+</div>
+
+<div class="card">
+<h3>Resize Image</h3>
+<button onclick="location.href='/resize-image'">Open</button>
+</div>
+
+<div class="card">
+<h3>Crop Image</h3>
+<button onclick="location.href='/crop-image'">Open</button>
+</div>
+
+<div class="card">
+<h3>JPG to PNG</h3>
+<button onclick="location.href='/jpg-to-png'">Open</button>
+</div>
+
+<div class="card">
+<h3>PNG to JPG</h3>
+<button onclick="location.href='/png-to-jpg'">Open</button>
+</div>
+
+<div class="card">
+<h3>Bulk Image Compressor</h3>
+<button onclick="location.href='/bulk-compress'">Open</button>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

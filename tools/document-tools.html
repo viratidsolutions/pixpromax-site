@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Document Tools | PixProMax</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+margin:0;
+background:#f5f5f5;
+text-align:center;
+}
+
+header{
+background:#111;
+color:white;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+}
+
+.section{
+padding:40px 20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+max-width:900px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:8px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+button{
+background:#0077ff;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#005ce0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>PixProMax</header>
+
+<div class="section">
+
+<h1>Document Tools</h1>
+
+<p>Convert and manage document files online.</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>Image to PDF</h3>
+<button onclick="location.href='/image-to-pdf'">Open</button>
+</div>
+
+<div class="card">
+<h3>PDF to Image</h3>
+<button onclick="location.href='/pdf-to-image'">Open</button>
+</div>
+
+<div class="card">
+<h3>Merge PDF</h3>
+<button onclick="location.href='/merge-pdf'">Open</button>
+</div>
+
+<div class="card">
+<h3>Split PDF</h3>
+<button onclick="location.href='/split-pdf'">Open</button>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

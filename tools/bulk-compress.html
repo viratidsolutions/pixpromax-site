@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Bulk Image Compressor | PixProMax</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+font-family:Arial, sans-serif;
+background:#f5f5f5;
+margin:0;
+text-align:center;
+}
+
+header{
+background:#111;
+color:white;
+padding:18px;
+font-size:22px;
+}
+
+.container{
+margin-top:40px;
+}
+
+.dropbox{
+border:2px dashed #bbb;
+padding:40px;
+width:60%;
+margin:auto;
+background:white;
+border-radius:6px;
+}
+
+input{
+margin-top:10px;
+}
+
+.preview{
+margin-top:20px;
+}
+
+button{
+background:#0077ff;
+color:white;
+padding:10px 22px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin:10px;
+}
+
+button:hover{
+background:#005ce0;
+}
+.upload-box{
+
+border:2px dashed #0077ff;
+border-radius:10px;
+padding:40px;
+text-align:center;
+background:#f9fbff;
+cursor:pointer;
+margin-top:20px;
+
+}
+
+.upload-box:hover{
+
+background:#eef5ff;
+
+}
+</style>
+
+</head>
+<script>
+
+const box=document.getElementById("uploadBox")
+const input=document.getElementById("fileInput")
+
+box.addEventListener("dragover",e=>{
+e.preventDefault()
+box.style.background="#e6f0ff"
+})
+
+box.addEventListener("dragleave",()=>{
+box.style.background="#f9fbff"
+})
+
+box.addEventListener("drop",e=>{
+e.preventDefault()
+
+input.files=e.dataTransfer.files
+
+box.style.background="#f9fbff"
+
+})
+
+</script>
+<body>
+
+<header>PixProMax</header>
+
+<div class="container">
+
+<h1>Bulk Image Compressor</h1>
+
+<p>Upload multiple images and compress them instantly.</p>
+
+<div class="dropbox">
+<div class="upload-box" id="uploadBox">
+
+<p>Drag & Drop your image here</p>
+
+<p>or</p>
+
+<button onclick="document.getElementById('fileInput').click()">Upload Image</button>
+
+<input type="file" id="fileInput" hidden>
+
+</div>
+</div>
+
+<div id="preview" class="preview"></div>
+
+</div>
+
+<script>
+
+document.getElementById("upload").addEventListener("change", function(e){
+
+let files=e.target.files
+let preview=document.getElementById("preview")
+preview.innerHTML=""
+
+Array.from(files).forEach(file=>{
+
+let img=new Image()
+
+img.onload=function(){
+
+let canvas=document.createElement("canvas")
+let ctx=canvas.getContext("2d")
+
+canvas.width=img.width
+canvas.height=img.height
+
+ctx.drawImage(img,0,0)
+
+let link=document.createElement("a")
+link.textContent="Download "+file.name
+link.href=canvas.toDataURL("image/jpeg",0.6)
+link.download="compressed-"+file.name
+
+let div=document.createElement("div")
+div.appendChild(link)
+
+preview.appendChild(div)
+
+}
+
+img.src=URL.createObjectURL(file)
+
+})
+
+})
+
+</script>
+
+</body>
+</html>

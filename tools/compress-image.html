@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Compress Image Online | PixProMax</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+background:#f5f5f5;
+margin:0;
+text-align:center;
+}
+
+header{
+background:#111;
+color:white;
+padding:18px;
+font-size:22px;
+}
+
+.container{
+margin-top:40px;
+}
+
+.dropbox{
+border:2px dashed #bbb;
+padding:40px;
+width:60%;
+margin:auto;
+background:white;
+border-radius:6px;
+}
+
+canvas{
+margin-top:20px;
+max-width:90%;
+}
+
+.slider{
+width:300px;
+margin-top:20px;
+}
+
+button{
+background:#0077ff;
+color:white;
+padding:12px 28px;
+border:none;
+border-radius:5px;
+font-size:15px;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+background:#005ce0;
+}
+
+.stats{
+margin-top:15px;
+font-size:16px;
+}
+
+.upload-box{
+
+border:2px dashed #0077ff;
+border-radius:10px;
+padding:40px;
+text-align:center;
+background:#f9fbff;
+cursor:pointer;
+margin-top:20px;
+
+}
+
+.upload-box:hover{
+
+background:#eef5ff;
+
+}
+</style>
+
+</head>
+
+<script>
+
+const box=document.getElementById("uploadBox")
+const input=document.getElementById("fileInput")
+
+box.addEventListener("dragover",e=>{
+e.preventDefault()
+box.style.background="#e6f0ff"
+})
+
+box.addEventListener("dragleave",()=>{
+box.style.background="#f9fbff"
+})
+
+box.addEventListener("drop",e=>{
+e.preventDefault()
+
+input.files=e.dataTransfer.files
+
+box.style.background="#f9fbff"
+
+})
+
+</script>
+<body>
+
+<header>PixProMax</header>
+
+<div class="container">
+
+<h1>Compress Image Online</h1>
+
+<p>Reduce image file size instantly without losing visible quality.</p>
+
+<div class="dropbox">
+<div class="upload-box" id="uploadBox">
+
+<p>Drag & Drop your image here</p>
+
+<p>or</p>
+
+<button onclick="document.getElementById('fileInput').click()">Upload Image</button>
+
+<input type="file" id="fileInput" hidden>
+
+</div>
+</div>
+
+<br>
+
+<label>Compression Quality</label><br>
+
+<input type="range" min="0.1" max="1" step="0.1" value="0.7" id="quality" class="slider">
+
+<br>
+
+<canvas id="canvas"></canvas>
+
+<div class="stats" id="stats"></div>
+
+<button onclick="downloadImage()">Download Compressed Image</button>
+
+</div>
+
+<script>
+
+let canvas=document.getElementById("canvas")
+let ctx=canvas.getContext("2d")
+
+let originalSize=0
+let uploadedImage=null
+
+document.getElementById("upload").addEventListener("change",function(e){
+
+let file=e.target.files[0]
+
+if(!file) return
+
+originalSize=file.size
+
+let img=new Image()
+
+img.onload=function(){
+
+canvas.width=img.width
+canvas.height=img.height
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+ctx.drawImage(img,0,0)
+
+uploadedImage=img
+
+}
+
+img.src=URL.createObjectURL(file)
+
+})
+
+function downloadImage(){
+
+if(!uploadedImage) return
+
+let quality=parseFloat(document.getElementById("quality").value)
+
+let dataURL=canvas.toDataURL("image/jpeg",quality)
+
+let compressedSize=Math.round((dataURL.length*3)/4)
+
+let reduction=Math.round((1-compressedSize/originalSize)*100)
+
+document.getElementById("stats").innerHTML=
+"Original: "+Math.round(originalSize/1024)+" KB | Compressed: "+
+Math.round(compressedSize/1024)+" KB | Reduction: "+reduction+"%"
+
+let link=document.createElement("a")
+
+link.href=dataURL
+link.download="pixpromax-compressed.jpg"
+
+link.click()
+
+}
+<section style="max-width:900px;margin:60px auto;text-align:left;line-height:1.6">
+
+<h2>How to Compress Images Online</h2>
+
+<p>PixProMax allows you to compress images quickly without noticeable loss of quality. Simply upload your image, adjust the compression level, and download the optimized file instantly.</p>
+
+<ol>
+<li>Upload your image using the upload button.</li>
+<li>Adjust the compression slider to control file size.</li>
+<li>Preview the optimized image.</li>
+<li>Download the compressed image.</li>
+</ol>
+
+<h2>Why Compress Images?</h2>
+
+<p>Image compression reduces file size while maintaining visual quality. This is useful for websites, email attachments, and social media uploads.</p>
+
+<ul>
+<li>Faster website loading</li>
+<li>Reduced storage usage</li>
+<li>Improved SEO performance</li>
+<li>Better user experience</li>
+</ul>
+
+<h2>Supported Image Formats</h2>
+
+<p>PixProMax supports common image formats including JPG, PNG, and WebP. The compressed images maintain high quality while significantly reducing file size.</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is this image compressor free?</h3>
+<p>Yes. PixProMax tools are completely free to use.</p>
+
+<h3>Do you store uploaded images?</h3>
+<p>No. Images are processed directly in your browser and are not uploaded to any server.</p>
+
+<h3>Does compression reduce quality?</h3>
+<p>Compression reduces file size while keeping visual quality nearly identical for most images.</p>
+
+</section>
+
+
+</script>
+
+</body>
+</html>
