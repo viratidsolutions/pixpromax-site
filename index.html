@@ -24,9 +24,14 @@ box-sizing:border-box;
 }
 
 body{
+
 font-family:'Poppins',sans-serif;
-background:#f5f7fb;
+
+background:
+linear-gradient(135deg,#eef3ff,#f7fbff);
+
 color:#333;
+
 }
 
 /* NAVBAR */
@@ -160,12 +165,21 @@ gap:30px;
 
 .category-card{
 
-background:white;
-padding:35px;
-border-radius:16px;
+background:rgba(255,255,255,0.55);
+
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border-radius:18px;
+
+border:1px solid rgba(255,255,255,0.4);
+
+padding:36px;
+
+text-align:center;
 
 box-shadow:
-0 5px 18px rgba(0,0,0,0.08);
+0 10px 25px rgba(0,0,0,0.08);
 
 transition:
 transform .35s cubic-bezier(.22,1,.36,1),
@@ -177,10 +191,10 @@ cursor:pointer;
 
 .category-card:hover{
 
-transform:translateY(-10px) scale(1.03);
+transform:translateY(-10px) scale(1.04);
 
 box-shadow:
-0 25px 50px rgba(0,0,0,0.18);
+0 30px 60px rgba(0,0,0,0.18);
 
 }
 
@@ -208,13 +222,21 @@ gap:30px;
 
 .card{
 
-background:white;
-padding:30px;
-border-radius:16px;
+background:rgba(255,255,255,0.55);
+
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border-radius:18px;
+
+border:1px solid rgba(255,255,255,0.4);
+
+padding:32px;
+
+text-align:center;
 
 box-shadow:
-0 6px 20px rgba(0,0,0,0.08),
-0 1px 3px rgba(0,0,0,0.04);
+0 10px 25px rgba(0,0,0,0.08);
 
 transition:
 transform .35s cubic-bezier(.22,1,.36,1),
@@ -227,11 +249,12 @@ position:relative;
 
 .card:hover{
 
-transform:translateY(-10px) scale(1.03);
+transform:translateY(-10px) scale(1.04);
 
 box-shadow:
-0 25px 50px rgba(0,0,0,0.18),
-0 8px 18px rgba(0,0,0,0.10);
+0 30px 60px rgba(0,0,0,0.18);
+
+background:rgba(255,255,255,0.75);
 
 }
 
@@ -239,6 +262,39 @@ box-shadow:
 font-size:40px;
 color:#0077ff;
 margin-bottom:15px;
+}
+
+.card::after{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+border-radius:18px;
+
+opacity:0;
+
+background:
+linear-gradient(
+120deg,
+rgba(255,255,255,0.5),
+rgba(255,255,255,0.1)
+);
+
+transition:opacity .35s ease;
+
+}
+
+.card:hover::after{
+
+opacity:1;
+
 }
 
 .card h3{
@@ -288,7 +344,9 @@ padding:25px;
 .tool-icon{
 
 font-size:40px;
+
 color:#0077ff;
+
 margin-bottom:15px;
 
 transition:
@@ -299,7 +357,8 @@ color .35s ease;
 
 .card:hover .tool-icon{
 
-transform:scale(1.25) rotate(8deg);
+transform:scale(1.25) rotate(10deg);
+
 color:#005ce0;
 
 }
