@@ -411,6 +411,43 @@ transition:opacity .35s ease;
 opacity:1;
 }
 
+.card::before,
+.category-card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+border-radius:18px;
+
+background:radial-gradient(
+circle at var(--x) var(--y),
+rgba(255,255,255,0.55),
+transparent 60%
+);
+
+opacity:0;
+
+transition:opacity .25s ease;
+
+pointer-events:none;
+
+}
+
+.card:hover::before,
+.category-card:hover::before{
+
+opacity:1;
+
+}
+
+
 </style>
 
 </head>
@@ -449,6 +486,29 @@ card.style.transform =
 });
 
 </script>
+
+<script>
+
+const glowCards = document.querySelectorAll(".card, .category-card");
+
+glowCards.forEach(card => {
+
+card.addEventListener("mousemove", e => {
+
+const rect = card.getBoundingClientRect();
+
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+
+card.style.setProperty("--x", x + "px");
+card.style.setProperty("--y", y + "px");
+
+});
+
+});
+
+</script>
+
 
 <body>
 
