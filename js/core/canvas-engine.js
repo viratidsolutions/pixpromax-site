@@ -40,12 +40,22 @@ reader.readAsDataURL(file)
 
 /* Resize image */
 
-resize(width, height){
+resize(width,height){
+
+width = parseInt(width)
+height = parseInt(height)
+
+if(!width || !height){
+alert("Enter valid width and height")
+return
+}
 
 this.canvas.width = width
 this.canvas.height = height
 
-this.ctx.drawImage(this.image, 0, 0, width, height)
+this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height)
+
+this.ctx.drawImage(this.image,0,0,width,height)
 
 }
 
